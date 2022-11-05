@@ -30,13 +30,15 @@ class UserRepository:
         return user
     
     def update(self, id: int, user: UserSchema) -> UserModel:
-        stmt_updated = update(UserModel).where(UserModel.id == id).values(
-            username=user.username,
-            email=user.email,
-            password=user.password
-        )
-        
-        self.session.execute(stmt_updated)
+     
+        stmt_updated = self.session.query(UserModel).filter(UserModel.id == id).update(
+                { 
+                    "username":user.username,
+                    "email":user.email,
+                    "password":user.password
+                }, synchronize_session="fetch"
+            )
+
         self.session.commit()
         return stmt_updated
 
