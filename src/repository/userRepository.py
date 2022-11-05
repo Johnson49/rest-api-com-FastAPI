@@ -1,13 +1,13 @@
 from sqlalchemy.orm import Session
 from model import UserModel
-from schemas import UserSchema
+from schemas import UserSchemaSignUP
 from sqlalchemy import select
 
 class UserRepository:
     def __init__(self, session: Session) -> None:
         self.session = session
         
-    def create(self, user: UserSchema) -> UserModel:
+    def create(self, user: UserSchemaSignUP) -> UserModel:
         user = UserModel(
             username=user.username,
             email=user.email,
@@ -29,7 +29,7 @@ class UserRepository:
         user = self.session.query(UserModel).filter_by(id=id).first()
         return user
     
-    def update(self, id: int, user: UserSchema) -> UserModel:
+    def update(self, id: int, user: UserSchemaSignUP) -> UserModel:
      
         stmt_updated = self.session.query(UserModel).filter(UserModel.id == id).update(
                 { 

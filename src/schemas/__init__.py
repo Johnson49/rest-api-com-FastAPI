@@ -1,1 +1,1 @@
-from .userSchema import UserSchema
+from .userSchema import UserSchemaSignUP
