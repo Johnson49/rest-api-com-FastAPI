@@ -11,7 +11,7 @@ class UserRepository:
         user = UserModel(
             username=user.username,
             email=user.email,
-            passwords=user.passwords
+            password=user.password
         )
         
         self.session.add(user)
@@ -20,7 +20,7 @@ class UserRepository:
         
         return user
     
-    def getUser(self) -> UserModel:
+    def get(self) -> UserModel:
         stmt  = select(UserModel)
         users = self.session.execute(stmt).all()
         return users

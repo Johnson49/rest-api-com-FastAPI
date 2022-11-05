@@ -1,1 +1,1 @@
-from config import create_engine, generate_session, Base
+from .config import create_database, generate_session, Base
