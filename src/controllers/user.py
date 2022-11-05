@@ -1,8 +1,11 @@
 from fastapi import APIRouter, status, Depends
 from services import service_get_user, service_get_user_id, service_add_user, service_update_user, service_delete_user, service_login_user
-from schemas import UserSchemaSignUP, UserSchemaLogin
+from schemas import UserSchemaSignUP, UserSchemaLogin, User
 from sqlalchemy.orm import Session
 from configuration import generate_session
+from utility import get_authenticated_user
+
+
 routes = APIRouter()
 
 @routes.get("/api/user")
@@ -29,3 +32,7 @@ def add_user(id:int, session: Session = Depends(generate_session)):
 @routes.post("/auth/sign-in")
 def login_user(user: UserSchemaLogin ,session: Session = Depends(generate_session)):
     return service_login_user(user=user, session=session)
+
+@routes.post("/me", response_model=User)
+def me(user: UserSchemaSignUP = Depends(get_authenticated_user)):
+    return user
