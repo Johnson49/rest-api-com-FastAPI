@@ -1,6 +1,6 @@
 from fastapi import APIRouter, status, Depends
-from services import service_get_user, service_get_user_id, service_add_user, service_update_user, service_delete_user
-from schemas import UserSchemaSignUP
+from services import service_get_user, service_get_user_id, service_add_user, service_update_user, service_delete_user, service_login_user
+from schemas import UserSchemaSignUP, UserSchemaLogin
 from sqlalchemy.orm import Session
 from configuration import generate_session
 routes = APIRouter()
@@ -25,3 +25,7 @@ def add_user(id:int, user: UserSchemaSignUP, session: Session = Depends(generate
 @routes.delete("/api/user/{id}", status_code=status.HTTP_200_OK)
 def add_user(id:int, session: Session = Depends(generate_session)):
     return service_delete_user(session=session, id=id)
+
+@routes.post("/auth/sign-in")
+def login_user(user: UserSchemaLogin ,session: Session = Depends(generate_session)):
+    return service_login_user(user=user, session=session)
