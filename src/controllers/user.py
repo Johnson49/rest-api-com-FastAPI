@@ -14,7 +14,7 @@ def get_user(id:int, session: Session = Depends(generate_session)):
     return service_get_user_id(session=session, id=id)
 
 
-@routes.post("/api/sign-up", status_code=status.HTTP_201_CREATED)
+@routes.post("/auth/sign-up", status_code=status.HTTP_201_CREATED)
 def add_user(user: UserSchema, session: Session = Depends(generate_session)):
     return service_add_user(user=user, session=session)
 
