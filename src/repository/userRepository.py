@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 from model import UserModel
 from schemas import UserSchema
-from sqlalchemy import select
+from sqlalchemy import select, update
 
 class UserRepository:
     def __init__(self, session: Session) -> None:
@@ -24,3 +24,22 @@ class UserRepository:
         stmt  = select(UserModel)
         users = self.session.execute(stmt).all()
         return users
+    
+    def get_id(self, id: int) -> UserModel:
+        user = self.session.query(UserModel).filter_by(id=id).first()
+        return user
+    
+    def update(self, id: int, user: UserSchema) -> UserModel:
+        stmt_updated = update(UserModel).where(UserModel.id == id).values(
+            username=user.username,
+            email=user.email,
+            password=user.password
+        )
+        
+        self.session.execute(stmt_updated)
+        self.session.commit()
+        return stmt_updated
+
+    def delete(self, id: int) -> None:
+        self.session.query(UserModel).filter_by(id = id).delete()
+        self.session.commit()
