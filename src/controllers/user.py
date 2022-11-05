@@ -4,7 +4,7 @@ from schemas import UserSchemaSignUP, UserSchemaLogin, User
 from sqlalchemy.orm import Session
 from configuration import generate_session
 from utility import get_authenticated_user
-
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 
 routes = APIRouter()
 
@@ -34,5 +34,20 @@ def login_user(user: UserSchemaLogin ,session: Session = Depends(generate_sessio
     return service_login_user(user=user, session=session)
 
 @routes.post("/me", response_model=User)
-def me(user: UserSchemaSignUP = Depends(get_authenticated_user)):
+def me(user: User = Depends(get_authenticated_user)):
     return user
+
+# @routes.post("/token")
+# async def token_generate(form: OAuth2PasswordRequestForm = Depends()):
+#     print(form)
+#     return{"access_token": form.username, "token_type": "bearer"}
+
+# oauth_scheme = OAuth2PasswordBearer(tokenUrl="token")
+
+# @routes.get("/self")
+# async def self(token: str = Depends(oauth_scheme)):
+#     print(token)
+#     return{
+#         "user": "teste",
+#         "profile_pic": "my_face"
+#     }
