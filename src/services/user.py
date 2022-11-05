@@ -3,6 +3,8 @@ from configuration import generate_session
 from sqlalchemy.orm import Session
 from fastapi import status, HTTPException
 from schemas import UserSchema
+from provide import generate_hash
+
 
 def service_get_user(session: Session) :
     result = UserRepository(session=session).get()
@@ -15,6 +17,7 @@ def service_get_user_id(session: Session, id: int):
     return result
 
 def service_add_user(user: UserSchema,  session: Session):
+    user.password = generate_hash(user.password)
     result = UserRepository(session=session).create(user)
     return result
 
