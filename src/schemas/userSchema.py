@@ -16,3 +16,8 @@ class UserSchemaLogin(BaseModel):
     
     class Config:
         orm_mode = True
+        
+class User(BaseModel):
+    id: int
+    username: str
+    email: str
