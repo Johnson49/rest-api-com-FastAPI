@@ -42,13 +42,13 @@ def service_login_user(user: UserSchemaLogin, session: Session):
     
     user_located = UserValidation(session=session).exist_user(email)
     
-    if user_located:
+    if not user_located:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, 
                             detail=f"Email ou senha estão incorretos, verifique se digitou corretamente. "
                             )
         
     valid_pwd = check_hash(password, user_located.password)
-    if not valid_pwd:
+    if not valid_pwd:   
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, 
                             detail=f"Email ou senha estão incorretos, verifique se digitou corretamente. "
                             )
