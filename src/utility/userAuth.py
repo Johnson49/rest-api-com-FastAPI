@@ -8,7 +8,7 @@ from validation import UserValidation
 oauth1_schema = OAuth2PasswordBearer(tokenUrl="token")
 
 
-def get_authenticated_user(token: Depends(oauth1_schema) ,session: Session):
+def get_authenticated_user(session: Session, token: str = Depends(oauth1_schema)):
     exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED, 
         detail='Token invalido'
