@@ -7,7 +7,7 @@ class UserRepository:
     def __init__(self, session: Session) -> None:
         self.session = session
         
-    def create(self, user: UserSchema) -> None:
+    def create(self, user: UserSchema) -> UserModel:
         user = UserModel(
             username=user.username,
             email=user.email,
@@ -20,7 +20,7 @@ class UserRepository:
         
         return user
     
-    def getUser(self):
+    def getUser(self) -> UserModel:
         stmt  = select(UserModel)
         users = self.session.execute(stmt).all()
         return users

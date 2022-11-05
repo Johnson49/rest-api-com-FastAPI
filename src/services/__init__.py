@@ -1,1 +1,1 @@
-from .user import service_get_user
+from .user import service_get_user, service_add_user
