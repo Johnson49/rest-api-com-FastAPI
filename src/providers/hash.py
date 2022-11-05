@@ -1,9 +1,11 @@
-from passlib.hash import pbkdf2_sha256
+from passlib.context import CryptContext
 
+
+hash_context = CryptContext(schemes=['bcrypt'])
 
 def generate_hash(password: str):
-    return pbkdf2_sha256.hash(password)
+    return hash_context.hash(password)
 
 
 def check_hash(password: str, hash: str):
-    return pbkdf2_sha256.verify(password, hash)
+    return hash_context.verify(password, hash)
