@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 from model import UserModel
 from schemas import UserSchema
-from sqlalchemy import select, update
+from sqlalchemy import select
 
 class UserRepository:
     def __init__(self, session: Session) -> None:
