@@ -55,4 +55,4 @@ def service_login_user(user: UserSchemaLogin, session: Session):
 
     token = create_access_token({"sub": user_located.email})
     
-    return {"info": user_located, "access_token": token}
+    return {"info": user_located, "access_token": token, "token_type": "bearer"}
