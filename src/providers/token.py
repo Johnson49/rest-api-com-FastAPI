@@ -22,6 +22,6 @@ def create_access_token(data: dict):
 
 
 def check_access_token(token: str):
-    payload = jwt.decode(token, SECRET_KEY, algorithm=[ALGORITMO])
+    payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITMO])
     
     return payload.get("sub")
