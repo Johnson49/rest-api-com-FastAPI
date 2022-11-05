@@ -3,7 +3,7 @@ from configuration import generate_session
 from sqlalchemy.orm import Session
 from fastapi import status, HTTPException
 from schemas import UserSchema
-from provide import generate_hash
+from providers import generate_hash
 
 
 def service_get_user(session: Session) :
