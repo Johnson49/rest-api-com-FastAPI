@@ -1,5 +1,5 @@
 from repository import UserRepository
-from configuration import generate_session
+from validation import UserValidation
 from sqlalchemy.orm import Session
 from fastapi import status, HTTPException
 from schemas import UserSchema
@@ -17,6 +17,13 @@ def service_get_user_id(session: Session, id: int):
     return result
 
 def service_add_user(user: UserSchema,  session: Session):
+    user_located = UserValidation(session=session).exist_user(user.email)
+    
+    if user_located:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, 
+                            detail=f"Já existe um usuário com este email. "
+                            )
+    
     user.password = generate_hash(user.password)
     result = UserRepository(session=session).create(user)
     return result
