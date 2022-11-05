@@ -2,8 +2,8 @@ from repository import UserRepository
 from validation import UserValidation
 from sqlalchemy.orm import Session
 from fastapi import status, HTTPException
-from schemas import UserSchemaSignUP
-from providers import generate_hash
+from schemas import UserSchemaSignUP, UserSchemaLogin
+from providers import generate_hash, check_hash
 
 
 def service_get_user(session: Session) :
@@ -32,6 +32,25 @@ def service_update_user(user: UserSchemaSignUP,  session: Session, id: int):
     result = UserRepository(session=session).update(user=user, id=id)
     return result
 
-def service_delete_user( session: Session, id: int):
+def service_delete_user(session: Session, id: int):
     return UserRepository(session=session).delete( id=id)
   
+
+def service_login_user(user: UserSchemaLogin, session: Session):
+    email = user.email
+    password = user.password
+    
+    user_located = UserValidation(session=session).exist_user(email)
+    
+    if user_located:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, 
+                            detail=f"Email ou senha estão incorretos, verifique se digitou corretamente. "
+                            )
+        
+    valid_pwd = check_hash(password, user_located.password)
+    if not valid_pwd:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, 
+                            detail=f"Email ou senha estão incorretos, verifique se digitou corretamente. "
+                            )
+    
+    return user_located
