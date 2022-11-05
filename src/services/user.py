@@ -3,7 +3,7 @@ from validation import UserValidation
 from sqlalchemy.orm import Session
 from fastapi import status, HTTPException
 from schemas import UserSchemaSignUP, UserSchemaLogin
-from providers import generate_hash, check_hash
+from providers import generate_hash, check_hash, create_access_token
 
 
 def service_get_user(session: Session) :
@@ -52,5 +52,7 @@ def service_login_user(user: UserSchemaLogin, session: Session):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, 
                             detail=f"Email ou senha estão incorretos, verifique se digitou corretamente. "
                             )
+
+    token = create_access_token({"sub": user_located.email})
     
-    return user_located
+    return {"info": user_located, "access_token": token}
