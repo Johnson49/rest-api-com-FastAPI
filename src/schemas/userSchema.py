@@ -8,3 +8,11 @@ class UserSchemaSignUP(BaseModel):
     
     class Config:
         orm_mode = True
+        
+        
+class UserSchemaLogin(BaseModel):
+    email: str
+    password: str
+    
+    class Config:
+        orm_mode = True
