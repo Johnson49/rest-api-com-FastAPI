@@ -1,0 +1,1 @@
+from .userAuth import get_authenticated_user
