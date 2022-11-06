@@ -18,6 +18,9 @@ class UserSchemaLogin(BaseModel):
         orm_mode = True
         
 class User(BaseModel):
-    id: int
+    email: str  
+
+class UserBasic(BaseModel):
     username: str
     email: str
+    
