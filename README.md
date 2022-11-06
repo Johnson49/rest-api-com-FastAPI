@@ -95,5 +95,5 @@ A documentação poderá ser acessada através do endereço: `http://localhost:8
 |POST | /auth/sign-up | Registrar um novo usuário. | Público |
 |POST | /auth/sign-in | Realiza o login e obtém o token | Público |
 |POST | /auth/me | Obtém dados do usuário | Privado |
-| PUT | /api/user/edit/41| Atualiza os dados do usuário de id 1.| Público |
+| PUT | /api/user/edit/1| Atualiza os dados do usuário de id 1.| Público |
 | DELETE | /api/user/1 | Deleta usuário de id 1. | Público |
