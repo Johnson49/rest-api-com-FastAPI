@@ -67,7 +67,7 @@ uvicorn main:app --reload
 
 <br>
 
-### Optando pelo Docker  
+## Optando pelo Docker  
 
 :warning: Verifique se docker está ativo, antes de prosseguir.
 
