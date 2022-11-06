@@ -57,6 +57,6 @@ uvicorn main:app --reload
 |GET |  /api/user/1 | Obtém usuário de id 1| Público |
 |POST | /auth/sign-up | Registrar um novo usuário. | Público |
 |POST | /auth/sign-in | Realiza o login e obtém o token | Público |
-|POST | /me | Obtém dados do usuário | Privado |
+|POST | /auth/me | Obtém dados do usuário | Privado |
 | PUT | /api/user/edit/41| Atualiza os dados do usuário de id 1.| Público |
 | DELETE | /api/user/1 | Deleta usuário de id 1. | Público |
