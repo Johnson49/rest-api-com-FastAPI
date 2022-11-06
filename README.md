@@ -61,6 +61,27 @@ Permitirá ler as variáveis de ambientes definidas no arquivo `.env`.
 uvicorn main:app --reload
 ```
 
+<br>
+
+## Ou
+
+<br>
+
+### Optando pelo Docker  
+
+:warning: Verifique se docker está ativo, antes de prosseguir.
+
+### Suba os contêineres
+
+```shell
+docker compose up --build -d
+```
+
+Caso não possua o docker compose na versão 2, em vez de `docker compose` use `docker-compose`
+
+### Acesse a documentação
+
+A documentação poderá ser acessada através do endereço: `http://localhost:8000/`
 ## Endpoints
 
 > Os endpoints e seus receptivos acessos estão suscetíveis a mudança a medida que o projeto avança.
