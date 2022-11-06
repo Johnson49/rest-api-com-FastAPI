@@ -35,9 +35,25 @@ Esse comando instalará as seguintes bibliotecas:
 
 FastAPI é um moderno e rápido (alta performance) framework web para construção de APIs.
 
-2. [SQLAlchemy](https://www.sqlalchemy.org)
+2. [Uvicorn](https://www.uvicorn.org)
+
+Uvicorn é uma implementação de servidor web ASGI para Python.
+
+3. [SQLAlchemy](https://www.sqlalchemy.org)
 
 SQLAlchemy é um ORM completo, que realizará as manipulações no banco de dados.
+
+4. [Passlib](https://passlib.readthedocs.io/en/stable/)
+
+Passlib é uma biblioteca de hash de senha.
+
+5. [Python-jose](https://python-jose.readthedocs.io/en/latest/)
+
+Biblioteca responsável por gera os tokens JWT.
+
+6. [Python-dotenv](https://pypi.org/project/python-dotenv/)
+
+Permitirá ler as variáveis de ambientes definidas no arquivo `.env`.
 
 ### Inicie o servidor
 
@@ -49,7 +65,7 @@ uvicorn main:app --reload
 
 > Os endpoints e seus receptivos acessos estão suscetíveis a mudança a medida que o projeto avança.
 
-### Users 
+### Users
 
 |Método|Rota| Funcionalidade| Acesso |
 |:-------:|:-----:|:------:|:------:|
